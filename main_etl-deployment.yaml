@@ -1,0 +1,40 @@
+###
+### A complete description of a Prefect Deployment for flow 'main-etl'
+###
+name: web_to_bucket
+description: null
+version: eee7932cec8ee0cf2c7cda2bbe9cf0d1
+# The work queue that will handle this deployment's runs
+work_queue_name: default
+work_pool_name: null
+tags: []
+parameters: {}
+schedule: null
+is_schedule_active: null
+infra_overrides: {}
+infrastructure:
+  type: process
+  env: {}
+  labels: {}
+  name: null
+  command: null
+  stream_output: true
+  working_dir: null
+  block_type_slug: process
+  _block_type_slug: process
+
+###
+### DO NOT EDIT BELOW THIS LINE
+###
+flow_name: main-etl
+manifest_path: null
+storage: null
+path: /workspaces/DE_airline_on_time
+entrypoint: main/etl_web_gcp.py:main_etl
+parameter_openapi_schema:
+  title: Parameters
+  type: object
+  properties: {}
+  required: null
+  definitions: null
+timestamp: '2023-03-22T22:28:08.467588+00:00'
