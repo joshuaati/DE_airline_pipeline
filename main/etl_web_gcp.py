@@ -4,8 +4,17 @@ import requests
 from typing import Tuple
 from google.cloud import storage
 from typing import List, Tuple
+from prefect import flow, task
+from prefect.tasks import task_input_hash
 
 
+os.environ['GOOGLE_APPLICATION_CREDENTIALS']='/Users/x/OneDrive/Documents/Python/Jan_2023/DE_Zoomcamp/week_4_analytics_engineering/.google/credentials/google_credentials.json'
+
+# prevent timeout due to low network
+storage.blob._DEFAULT_CHUNKSIZE = 5 * 1024* 1024  # 5 MB
+storage.blob._MAX_MULTIPART_SIZE = 5 * 1024* 1024  # 5 MB
+
+@task(retries=3, )
 def download_data(url: str, output_dir: str) -> str:
     """
     Downloads a zip file from the specified url and saves it to the specified
