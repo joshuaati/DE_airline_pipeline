@@ -88,15 +88,26 @@ def write_to_gcs(bucket_name: str, output_dir: str, extracted_files: Tuple[str, 
         blob.upload_from_string(content)
 
 @flow()
-def main_etl():
-    url = 'https://dataverse.harvard.edu/api/access/datafile/:persistentId?persistentId=doi:10.7910/DVN/HG7NV7/GIZV7R'
-    output_dir = '../data'
-    bucket_name = 'airline-buckets'
+def main_etl(url: str, output_dir: str, bucket_name: str) -> None:
+    """
+    This function is the main entry point for the ETL (Extract, Transform, Load) pipeline that downloads a zip file from a specified URL,
+    extracts it, and uploads the extracted files to a Google Cloud Storage bucket.
 
+    Args:
+        url : The URL of the zip file to download
+        output_dir : The directory to save the downloaded and extracted files to.
+        bucket_name : The name of the Google Cloud Storage bucket to upload the files to.
+
+    Returns:
+        None
+    """
     file_path = download_data(url, output_dir)
     extracted_files = extract_data(file_path, output_dir)
     print(extracted_files)
     write_to_gcs(bucket_name, output_dir, extracted_files)
 
 if __name__ == '__main__':
-    main_etl()
+    url = 'https://dataverse.harvard.edu/api/access/datafile/:persistentId?persistentId=doi:10.7910/DVN/HG7NV7/GIZV7R',
+    output_dir = '../data',
+    bucket_name = 'airline-buckets'
+    main_etl(url, output_dir, bucket_name)

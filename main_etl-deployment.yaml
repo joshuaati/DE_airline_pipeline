@@ -2,13 +2,28 @@
 ### A complete description of a Prefect Deployment for flow 'main-etl'
 ###
 name: web_to_bucket
-description: null
-version: eee7932cec8ee0cf2c7cda2bbe9cf0d1
+description: |-
+  This function is the main entry point for the ETL (Extract, Transform, Load) pipeline that downloads a zip file from a specified URL,
+  extracts it, and uploads the extracted files to a Google Cloud Storage bucket.
+
+  Args:
+      url : The URL of the zip file to download
+      output_dir : The directory to save the downloaded and extracted files to.
+      bucket_name : The name of the Google Cloud Storage bucket to upload the files to.
+
+  Returns:
+      None
+version: 0e92a2f683a1c2a1d5b6d3a4898d4383
 # The work queue that will handle this deployment's runs
 work_queue_name: default
 work_pool_name: null
 tags: []
-parameters: {}
+parameters:
+  {
+    "url": "https://dataverse.harvard.edu/api/access/datafile/:persistentId?persistentId=doi:10.7910/DVN/HG7NV7/GIZV7R",
+    "output_dir": "../data",
+    "bucket_name": "airline-buckets",
+  }
 schedule: null
 is_schedule_active: null
 infra_overrides: {}
@@ -34,7 +49,24 @@ entrypoint: main/etl_web_gcp.py:main_etl
 parameter_openapi_schema:
   title: Parameters
   type: object
-  properties: {}
+  properties:
+    url:
+      title: url
+      description: The URL of the zip file to download
+      default: https://dataverse.harvard.edu/api/access/datafile/:persistentId?persistentId=doi:10.7910/DVN/HG7NV7/GIZV7R
+      position: 0
+    output_dir:
+      title: output_dir
+      description: The directory to save the downloaded and extracted files to.
+      default: ../data
+      position: 1
+    bucket_name:
+      title: bucket_name
+      description:
+        The name of the Google Cloud Storage bucket to upload the files
+        to.
+      default: airline-buckets
+      position: 2
   required: null
   definitions: null
-timestamp: '2023-03-22T22:28:08.467588+00:00'
+timestamp: "2023-03-22T22:40:31.510834+00:00"
