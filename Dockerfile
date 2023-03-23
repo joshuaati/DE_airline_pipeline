@@ -26,6 +26,8 @@ RUN pip install piperider
 RUN pip install google-cloud-storage
 RUN pip install google-cloud-bigquery
 
+# Install Pandas
+RUN pip install pandas
 
 # Set environment variables for PySpark
 ENV PYSPARK_PYTHON=python3
