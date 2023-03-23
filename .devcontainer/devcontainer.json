@@ -13,7 +13,8 @@
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				"esbenp.prettier-vscode"
+				"esbenp.prettier-vscode",
+				"ms-toolsai.jupyter"
 			]
 		}
 	},

@@ -20,7 +20,7 @@ work_pool_name: null
 tags: []
 parameters:
   {
-    "url": "https://dataverse.harvard.edu/api/access/datafile/:persistentId?persistentId=doi:10.7910/DVN/HG7NV7/GIZV7R",
+    "url": "https://dataverse.harvard.edu/api/access/dataset/:persistentId/?persistentId=doi:10.7910/DVN/HG7NV7",
     "output_dir": "../data",
     "bucket_name": "airline-buckets",
   }

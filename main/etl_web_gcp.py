@@ -9,7 +9,8 @@ from prefect import flow, task
 from prefect.tasks import task_input_hash, exponential_backoff
 
 
-os.environ['GOOGLE_APPLICATION_CREDENTIALS']='/Users/x/.google/credentials/airlinepipeline.json'
+# os.environ['GOOGLE_APPLICATION_CREDENTIALS']='Users/x/.google/credentials/airlinepipeline.json'
+os.environ['GOOGLE_APPLICATION_CREDENTIALS']='C:/Users/x/.google/credentials/airlinepipeline.json'
 
 # prevent timeout due to low network
 storage.blob._DEFAULT_CHUNKSIZE = 5 * 1024* 1024  # 5 MB
@@ -31,11 +32,9 @@ def download_data(url: str, output_dir: str) -> str:
     os.makedirs(output_dir, exist_ok=True)
     file_path = os.path.join(output_dir, os.path.basename(url))
 
-    response = requests.get(url, stream=True)
+    response = requests.get(url)
     with open(file_path, 'wb') as f:
-        for chunk in response.iter_content(chunk_size=1024):
-            if chunk:
-                f.write(chunk)
+        f.write(response.content)
 
     return file_path
 
@@ -107,7 +106,7 @@ def main_etl(url: str, output_dir: str, bucket_name: str) -> None:
     write_to_gcs(bucket_name, output_dir, extracted_files)
 
 if __name__ == '__main__':
-    url = 'https://dataverse.harvard.edu/api/access/datafile/:persistentId?persistentId=doi:10.7910/DVN/HG7NV7/GIZV7R',
-    output_dir = '../data',
+    url = 'https://dataverse.harvard.edu/api/access/dataset/:persistentId/?persistentId=doi:10.7910/DVN/HG7NV7',
+    output_dir = 'data',
     bucket_name = 'airline-buckets'
     main_etl(url, output_dir, bucket_name)
