@@ -19,7 +19,7 @@ storage.blob._DEFAULT_CHUNKSIZE = 5 * 1024* 1024  # 5 MB
 storage.blob._MAX_MULTIPART_SIZE = 5 * 1024* 1024  # 5 MB
 
 
-# @task(name='download_data', retries=3, retry_delay_seconds=exponential_backoff(backoff_factor=10), cache_key_fn=task_input_hash, cache_expiration=timedelta(days=1))
+@task(name='download_data', retries=3, retry_delay_seconds=exponential_backoff(backoff_factor=10), cache_key_fn=task_input_hash, cache_expiration=timedelta(days=1))
 def download_data(url: str, output_dir: str) -> str:
     """
     Downloads a zip file from the specified url and saves it to the specified
@@ -43,7 +43,7 @@ def download_data(url: str, output_dir: str) -> str:
     return file_path
 
 
-# @task(name='extract_data', retries=3, retry_delay_seconds=exponential_backoff(backoff_factor=5))
+@task(name='extract_data', retries=3, retry_delay_seconds=exponential_backoff(backoff_factor=5))
 def extract_data(file_path: str, output_dir: str) -> Tuple[str, str]:
     """
     Extracts a zip file to the specified output directory.
@@ -68,7 +68,7 @@ def extract_data(file_path: str, output_dir: str) -> Tuple[str, str]:
     return tuple(extracted_files)
 
 
-@task(name='extract_data', retries=3, retry_delay_seconds=exponential_backoff(backoff_factor=5))
+@task(name='extract_individual_files', retries=3, retry_delay_seconds=exponential_backoff(backoff_factor=5))
 def extract_individual_files(extracted_files: Tuple[str, ...]) -> Tuple[str, ...]:
     """
     Extracts individual files from any files with a .bz2 extension in a list of extracted files.
@@ -95,7 +95,7 @@ def extract_individual_files(extracted_files: Tuple[str, ...]) -> Tuple[str, ...
     
     return tuple(new_extracted_files)
 
-# @task(name='write_data', retries=3, retry_delay_seconds=exponential_backoff(backoff_factor=10))
+@task(name='write_data', retries=3, retry_delay_seconds=exponential_backoff(backoff_factor=10))
 def write_to_gcs(bucket_name: str, output_dir: str, extracted_files: Tuple[str, ...]):
     """
     Uploads the contents of each file in the extracted_files list to a Google Cloud Storage bucket.
@@ -121,7 +121,7 @@ def write_to_gcs(bucket_name: str, output_dir: str, extracted_files: Tuple[str, 
         blob.upload_from_string(content)
 
 
-# @flow()
+@flow()
 def main_etl(url: str, output_dir: str, bucket_name: str) -> None:
     """
     This function is the main entry point for the ETL (Extract, Transform, Load) pipeline that downloads a zip file from a specified URL,
@@ -142,8 +142,7 @@ def main_etl(url: str, output_dir: str, bucket_name: str) -> None:
 
 
 if __name__ == '__main__':
-    url = 'https://dataverse.harvard.edu/api/access/dataset/:persistentId/?persistentId=doi:10.7910/DVN/HG7NV7',
-# url = "https://github.com/DataTalsClub/nyc-tlc-data/archive/refs/tags/yellow.zip"
+    url = "https://dataverse.harvard.edu/api/access/dataset/:persistentId/?persistentId=doi:10.7910/DVN/HG7NV7"
     output_dir = "data"
     bucket_name = "airline-buckets"
     main_etl(url, output_dir, bucket_name)

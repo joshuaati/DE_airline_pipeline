@@ -10,7 +10,6 @@ RUN pip install prefect
 RUN apt-get update && \
     apt-get install -y git
 
-
 # Install PySpark
 RUN apt-get update && \
     apt-get install -y openjdk-11-jdk-headless && \
@@ -34,11 +33,17 @@ ENV PYSPARK_PYTHON=python3
 ENV PYSPARK_DRIVER_PYTHON=jupyter
 ENV PYSPARK_DRIVER_PYTHON_OPTS='lab --ip=0.0.0.0 --port=8888 --no-browser'
 
-# Expose port for Jupyter
-EXPOSE 8888
-
 # Set working directory
 WORKDIR /app
+
+# Create output directory
+RUN mkdir /app/output
+
+# Set volume for output directory
+VOLUME /app/output
+
+# Expose port for Jupyter
+EXPOSE 8888
 
 # Start PySpark
 CMD ["pyspark"]
