@@ -2,6 +2,7 @@ import os
 import zipfile
 import requests
 import bz2
+import gzip
 from typing import Tuple
 from google.cloud import storage
 from datetime import timedelta
@@ -95,6 +96,28 @@ def extract_individual_files(extracted_files: Tuple[str, ...]) -> Tuple[str, ...
     
     return tuple(new_extracted_files)
 
+
+def compress_file(file_path: str) -> str:
+    """
+    Compresses a file at the specified path using gzip.
+
+    Args:
+        file_path: The path to the file to compress.
+
+    Returns:
+        The path to the compressed file.
+    """
+    compressed_path = file_path + '.gz'
+
+    with open(file_path, 'rb') as f_in:
+        with gzip.open(compressed_path, 'wb') as f_out:
+            f_out.writelines(f_in)
+
+    os.remove(file_path)
+
+    return compressed_path
+
+
 @task(name='write_data', retries=3, retry_delay_seconds=exponential_backoff(backoff_factor=10))
 def write_to_gcs(bucket_name: str, output_dir: str, extracted_files: Tuple[str, ...]):
     """
@@ -138,7 +161,8 @@ def main_etl(url: str, output_dir: str, bucket_name: str) -> None:
     file_path = download_data(url, output_dir)
     extracted_files = extract_data(file_path, output_dir)
     individual_files = extract_individual_files(extracted_files)
-    write_to_gcs(bucket_name, output_dir, individual_files)
+    compressed_files = [compress_file(file_path) for file_path in individual_files]
+    write_to_gcs(bucket_name, output_dir, compressed_files)
 
 
 if __name__ == '__main__':
