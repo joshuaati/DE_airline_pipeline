@@ -1,17 +1,15 @@
 import os
 import zipfile
 import requests
-import bz2
-import gzip
+import pandas as pd
 from typing import Tuple
 from google.cloud import storage
 from datetime import timedelta
-from typing import List, Tuple
+from typing import Tuple
 from prefect import flow, task
 from prefect.tasks import task_input_hash, exponential_backoff
 
 
-# os.environ['GOOGLE_APPLICATION_CREDENTIALS']='Users/x/.google/credentials/airlinepipeline.json'
 os.environ['GOOGLE_APPLICATION_CREDENTIALS']='.google/airlinepipeline.json'
 
 
@@ -33,14 +31,20 @@ def download_data(url: str, output_dir: str) -> str:
     Returns:
         The path to the downloaded file.
     """
+    
+    # Create the output directory if it doesn't already exist
     output_dir = os.path.abspath(output_dir)
     os.makedirs(output_dir, exist_ok=True)
+    
+    # Create the file path to save the downloaded file to
     file_path = os.path.join(output_dir, os.path.basename(url))
 
+    # Download the file and save it to the specified path
     response = requests.get(url)
     with open(file_path, 'wb') as f:
         f.write(response.content)
 
+    # Return the file path
     return file_path
 
 
@@ -56,66 +60,68 @@ def extract_data(file_path: str, output_dir: str) -> Tuple[str, str]:
     Returns:
         A tuple containing the paths to the extracted files.
     """
+    
+    # Make sure the output directory exists, creating it if necessary
     output_dir = os.path.abspath(output_dir)
     os.makedirs(output_dir, exist_ok=True)
+    
+    # Extract the zip file to the output directory
     with zipfile.ZipFile(file_path, 'r') as zip_ref:
         zip_ref.extractall(output_dir)
-
+    
+    # Get a list of all the extracted files
     extracted_files = []
     for root, _, files in os.walk(output_dir):
         for file in files:
             extracted_files.append(os.path.join(root, file))
 
+    # Return the paths to the extracted files as a tuple
     return tuple(extracted_files)
 
 
-@task(name='extract_individual_files', retries=3, retry_delay_seconds=exponential_backoff(backoff_factor=5))
-def extract_individual_files(extracted_files: Tuple[str, ...]) -> Tuple[str, ...]:
+@task(name='compress_files', retries=3, retry_delay_seconds=exponential_backoff(backoff_factor=10))
+def compress_files(extracted_files: Tuple[str, ...], output_dir: str) -> Tuple[str, str]:
     """
-    Extracts individual files from any files with a .bz2 extension in a list of extracted files.
+    This function compresses extracted CSV files in .bz2 format into .gz format and saves them in the specified output
+    directory. If the CSV file is encoded with 'latin_1', it will first be decoded before being compressed. Additionally,
+    any occurrences of the characters '-', 'ä', 'æ', and 'â' in the 'TailNum' column will be stripped of whitespace.
 
-    Args:
-        extracted_files: A tuple of file paths that have been extracted from a ZIP file.
+    Parameters:
+    extracted_files (Tuple[str, ...]): A tuple of file paths to CSV files in .bz2 format to be compressed.
+    output_dir (str): The directory in which the compressed files will be saved.
 
     Returns:
-        A tuple of file paths that includes any files with a .bz2 extension decompressed to individual files.
+    Tuple[str, str]: A tuple of file paths to the compressed files in the output directory.
 
     """
-    new_extracted_files = []
     for file_path in extracted_files:
+        # Check if the file is in .bz2 format
         if file_path.endswith('.bz2'):
-            with open(file_path, 'rb') as f:
-                content = f.read()
-            decompressed_content = bz2.decompress(content)
-            new_file_path = file_path[:-4]  # remove .bz2 extension
-            with open(new_file_path, 'wb') as f:
-                f.write(decompressed_content)
-            new_extracted_files.append(new_file_path)
-        else:
-            new_extracted_files.append(file_path)
+            compressed_file_path = file_path[:-4] + '.gz'
+            try:
+                # Try to read the file using the default encoding ('utf-8')
+                df = pd.read_csv(file_path)
+                # Compress the file and save it in the output directory
+                df.to_csv(compressed_file_path, index=False, compression='gzip')
+                # Remove the original file
+                os.remove(file_path)
+            except UnicodeDecodeError:
+                # If the default encoding fails, try reading the file using 'latin_1' encoding
+                df = pd.read_csv(file_path, encoding='latin_1')
+                df['TailNum'] = df['TailNum'].str.strip('-äæâ')
+                # Compress the file and save it in the output directory
+                df.to_csv(compressed_file_path, index=False, compression='gzip')
+                # Remove the original file
+                os.remove(file_path)
     
-    return tuple(new_extracted_files)
-
-
-def compress_file(file_path: str) -> str:
-    """
-    Compresses a file at the specified path using gzip.
-
-    Args:
-        file_path: The path to the file to compress.
-
-    Returns:
-        The path to the compressed file.
-    """
-    compressed_path = file_path + '.gz'
-
-    with open(file_path, 'rb') as f_in:
-        with gzip.open(compressed_path, 'wb') as f_out:
-            f_out.writelines(f_in)
-
-    os.remove(file_path)
-
-    return compressed_path
+    # Collect all file paths in the output directory
+    all_files = []
+    for root, _, files in os.walk(output_dir):
+        for file in files:
+            all_files.append(os.path.join(root, file))
+    
+    # Return the file paths as a tuple
+    return tuple(all_files)
 
 
 @task(name='write_data', retries=3, retry_delay_seconds=exponential_backoff(backoff_factor=10))
@@ -131,15 +137,22 @@ def write_to_gcs(bucket_name: str, output_dir: str, extracted_files: Tuple[str, 
     Returns:
         None
     """
+    
+    # Create a client for interacting with Google Cloud Storage
     storage_client = storage.Client()
+    # Get the specified bucket
     bucket = storage_client.bucket(bucket_name)
 
+    # Loop through each file to upload
     for file_path in extracted_files:
+        # Read the contents of the file
         with open(file_path, 'rb') as f:
             content = f.read()
 
+        # Construct the path to the file within the bucket
         filename = os.path.join(output_dir, os.path.basename(file_path))
 
+        # Create a blob for the file and upload the contents
         blob = bucket.blob(filename)
         blob.upload_from_string(content)
 
@@ -160,8 +173,7 @@ def main_etl(url: str, output_dir: str, bucket_name: str) -> None:
     """
     file_path = download_data(url, output_dir)
     extracted_files = extract_data(file_path, output_dir)
-    individual_files = extract_individual_files(extracted_files)
-    compressed_files = [compress_file(file_path) for file_path in individual_files]
+    compressed_files = compress_files(extracted_files, output_dir)
     write_to_gcs(bucket_name, output_dir, compressed_files)
 
 
