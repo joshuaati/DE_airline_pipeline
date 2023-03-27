@@ -7,3 +7,16 @@ prefect deployment build main/etl_web_gcp.py:main_etl -n "web_to_bucket"
 add the parameters in the `main_etl-deployment.yaml` file created
 prefect deployment apply main_etl-deployment.yaml
 prefect agent start -q 'default'
+
+prefect deployment build main/gcp_bq.py:create_table -n "big_query_table_create"
+
+jupyter notebook --allow-root
+
+SELECT column_name, data_type
+FROM `airlinepipeline.airline_on_time`.INFORMATION_SCHEMA.COLUMN_FIELD_PATHS
+WHERE table_name = '2008'
+
+## Running DBT
+
+dbt init
+dbt debug

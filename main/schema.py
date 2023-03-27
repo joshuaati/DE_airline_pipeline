@@ -1,0 +1,88 @@
+schema = [{
+  "name": "Year",
+  "type": "INT64"
+}, {
+  "name": "Month",
+  "type": "INT64"
+}, {
+  "name": "DayofMonth",
+  "type": "INT64"
+}, {
+  "name": "DayOfWeek",
+  "type": "INT64"
+}, {
+  "name": "DepTime",
+  "type": "FLOAT64"
+}, {
+  "name": "CRSDepTime",
+  "type": "INT64"
+}, {
+  "name": "ArrTime",
+  "type": "FLOAT64"
+}, {
+  "name": "CRSArrTime",
+  "type": "INT64"
+}, {
+  "name": "UniqueCarrier",
+  "type": "STRING"
+}, {
+  "name": "FlightNum",
+  "type": "INT64"
+}, {
+  "name": "TailNum",
+  "type": "STRING"
+}, {
+  "name": "ActualElapsedTime",
+  "type": "FLOAT64"
+}, {
+  "name": "CRSElapsedTime",
+  "type": "FLOAT64"
+}, {
+  "name": "AirTime",
+  "type": "FLOAT64"
+}, {
+  "name": "ArrDelay",
+  "type": "FLOAT64"
+}, {
+  "name": "DepDelay",
+  "type": "FLOAT64"
+}, {
+  "name": "Origin",
+  "type": "STRING"
+}, {
+  "name": "Dest",
+  "type": "STRING"
+}, {
+  "name": "Distance",
+  "type": "INT64"
+}, {
+  "name": "TaxiIn",
+  "type": "FLOAT64"
+}, {
+  "name": "TaxiOut",
+  "type": "FLOAT64"
+}, {
+  "name": "Cancelled",
+  "type": "INT64"
+}, {
+  "name": "CancellationCode",
+  "type": "STRING"
+}, {
+  "name": "Diverted",
+  "type": "INT64"
+}, {
+  "name": "CarrierDelay",
+  "type": "FLOAT64"
+}, {
+  "name": "WeatherDelay",
+  "type": "FLOAT64"
+}, {
+  "name": "NASDelay",
+  "type": "FLOAT64"
+}, {
+  "name": "SecurityDelay",
+  "type": "FLOAT64"
+}, {
+  "name": "LateAircraftDelay",
+  "type": "FLOAT64"
+}]

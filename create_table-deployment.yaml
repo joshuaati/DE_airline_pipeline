@@ -1,0 +1,60 @@
+###
+### A complete description of a Prefect Deployment for flow 'create-table'
+###
+name: big_query_table_create
+description: Create an external table in bigquery from google cloud buckets
+version: cf680dfd5cefa775255cee1d55aeee83
+# The work queue that will handle this deployment's runs
+work_queue_name: default
+work_pool_name: null
+tags: []
+parameters:
+  {
+    "project": "airlinepipeline",
+    "dataset": "airline_on_time",
+    "table_id": "airline",
+  }
+schedule: null
+is_schedule_active: null
+infra_overrides: {}
+infrastructure:
+  type: process
+  env: {}
+  labels: {}
+  name: null
+  command: null
+  stream_output: true
+  working_dir: null
+  block_type_slug: process
+  _block_type_slug: process
+
+###
+### DO NOT EDIT BELOW THIS LINE
+###
+flow_name: create-table
+manifest_path: null
+storage: null
+path: /workspaces/DE_airline_on_time
+entrypoint: main/gcp_bq.py:create_table
+parameter_openapi_schema:
+  title: Parameters
+  type: object
+  properties:
+    project:
+      title: project
+      position: 0
+      type: string
+    dataset:
+      title: dataset
+      position: 1
+      type: string
+    table_id:
+      title: table_id
+      position: 2
+      type: string
+  required:
+    - project
+    - dataset
+    - table_id
+  definitions: null
+timestamp: "2023-03-27T11:41:05.282149+00:00"
