@@ -1,5 +1,15 @@
 ## Creating a docker environment
 
+create the dockerfile
+create a vscode dev container with the dockerfile
+Install extensions in the dev container
+
+- python
+- jupyter
+- jupyter notebook renderer
+- jinja
+- prettier
+
 ## Lunch Prefect
 
 prefect orion start
@@ -20,3 +30,5 @@ WHERE table_name = '2008'
 
 dbt init
 dbt debug
+Create sql staging and core models
+if you want to create packages, create the packages.yml file and define the package and run - dbt deps
