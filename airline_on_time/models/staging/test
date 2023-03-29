@@ -1,0 +1,24 @@
+-- select 
+-- {{ dbt_utils.surrogate_key(['TailNum', 'FlightNum']) }} as FlightId,
+-- cast(concat(`Year`, '-', `Month`, '-', `DayofMonth`) as date) as FlightDate,
+-- TIME(FORMAT('%02d:%02d:00', 
+-- CASE 
+--     WHEN CAST(DepTime AS INT64) / 100 < 10 THEN 0 
+--     ELSE CAST(DepTime AS INT64) / 100 
+-- END,
+-- CAST(MOD(CAST(DepTime AS INT64), 100) AS INT64)
+-- )) AS DepTime,
+-- *
+-- from {{source('staging', 'airline_trips')}}
+
+-- WITH source_data AS (
+--     SELECT *, 
+--     CAST(FORMAT('%04.0f', DepTime) AS STRING) AS formatted_DepTime
+--     FROM {{source('staging', 'airline_trips')}}
+-- ),
+-- formatted_data AS (
+--     SELECT *,
+--     CAST(CONCAT(SUBSTR(formatted_DepTime, 1, 2), ':', SUBSTR(formatted_DepTime, 3, 2)) AS TIME) AS formatted_time
+--     FROM source_data
+-- )
+-- SELECT * FROM formatted_data
