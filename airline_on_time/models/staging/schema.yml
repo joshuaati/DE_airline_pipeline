@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: staging
+    database: airlinepipeline
+    schema: airline_on_time
+
+    tables:
+      - name: airline_trips

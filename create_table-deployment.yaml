@@ -12,7 +12,7 @@ parameters:
   {
     "project": "airlinepipeline",
     "dataset": "airline_on_time",
-    "table_id": "airline",
+    "table_id": "airline_trips",
   }
 schedule: null
 is_schedule_active: null

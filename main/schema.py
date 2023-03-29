@@ -54,7 +54,7 @@ schema = [{
   "type": "STRING"
 }, {
   "name": "Distance",
-  "type": "INT64"
+  "type": "FLOAT64"
 }, {
   "name": "TaxiIn",
   "type": "FLOAT64"

@@ -27,5 +27,5 @@ def create_table(project: str, dataset: str, table_id: str) -> None:
 if __name__ == '__main__':
     project = 'airlinepipeline'      
     dataset = 'airline_on_time'
-    table_id = 'airline'
+    table_id = 'airline_trips'
     create_table(project, dataset, table_id)
