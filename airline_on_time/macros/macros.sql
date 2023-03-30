@@ -1,8 +1,10 @@
 
 {% macro format_time(column_name) %}
     CASE
-        WHEN CAST({{ column_name }} AS INT64) > 2359 THEN FORMAT_TIME('%H:%M', TIME(0, 0, 0))
-        ELSE FORMAT_TIME('%H:%M', 
+        WHEN CAST({{ column_name }} AS INT64) BETWEEN 0 AND 2359
+        AND CAST(SUBSTR(CAST({{ column_name }} AS STRING), 1, 2) AS INT64) BETWEEN 0 AND 23
+        AND CAST(SUBSTR(CAST({{ column_name }} AS STRING), -2) AS INT64) BETWEEN 0 AND 59
+        THEN FORMAT_TIME('%H:%M', 
             parse_time(
                 '%H:%M', 
                 CONCAT(
@@ -12,9 +14,9 @@
                     )
                 )
             )
+        ELSE NULL
     END
 {% endmacro %}
-
 
 
 {% macro dow(column_name) %}
