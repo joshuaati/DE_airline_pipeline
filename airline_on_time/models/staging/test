@@ -22,3 +22,33 @@
 --     FROM source_data
 -- )
 -- SELECT * FROM formatted_data
+
+
+{% macro format_time(column_name) %}
+    FORMAT_TIME('%H:%M', 
+      parse_time(
+        '%H:%M', 
+        CONCAT(
+          SUBSTR(CAST(FORMAT('%04.0f', CAST({{ column_name }} AS FLOAT64)) AS STRING), 1, 2), 
+          ':', 
+          SUBSTR(CAST(FORMAT('%04.0f', CAST({{ column_name }} AS FLOAT64)) AS STRING), 3, 2))
+        ))
+{% endmacro %}
+
+
+{% macro format_time(column_name) %}
+    CASE
+        WHEN CAST({{ column_name }} AS INT64) > 2359 THEN '00:00'
+        ELSE FORMAT_TIME('%H:%M', 
+            parse_time(
+                '%H:%M', 
+                CONCAT(
+                    SUBSTR(CAST(FORMAT('%04.0f', CAST({{ column_name }} AS FLOAT64)) AS STRING), 1, 2), 
+                    ':', 
+                    SUBSTR(CAST(FORMAT('%04.0f', CAST({{ column_name }} AS FLOAT64)) AS STRING), 3, 2))
+                )
+            )
+        )
+    END
+{% endmacro %}
+
