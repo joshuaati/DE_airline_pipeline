@@ -300,7 +300,7 @@
 "33N","Delaware Airpark","Dover","DE","USA",39.21837556,-75.59642667
 "33S","Pru ","Ritzville","WA","USA",47.12487194,-118.3927539
 "34A","Laurens County","Laurens","SC","USA",34.50705556,-81.94719444
-"35A","Union County, Troy Shelton ","Union","SC","USA",34.68680111,-81.64121167
+"35A","Union County - Troy Shelton ","Union","SC","USA",34.68680111,-81.64121167
 "35D","Padgham ","Allegan","MI","USA",42.53098278,-85.82513556
 "35S","Wasco State","Wasco","OR","USA",45.58944444,-120.6741667
 "36K","Lakin","Lakin","KS","USA",37.96946389,-101.2554472
@@ -471,7 +471,7 @@
 "4U3","Liberty County","Chester","MT","USA",48.51072222,-110.9908639
 "4U6","Circle Town County","Circle","MT","USA",47.41861972,-105.5619431
 "4V0","Rangely","Rangely","CO","USA",40.09469917,-108.7612172
-"4V1","Johnson ","Walsenburg","CO","USA",37.69640056,-104.7838747
+"4V1","Johnson","Walsenburg","CO","USA",37.69640056,-104.7838747
 "4V9","Antelope County","Neligh","NE","USA",42.11222889,-98.0386775
 "4W1","Elizabethtown Municipal","Elizabethtown","NC","USA",34.60183722,-78.57973306
 "4Z4","Holy Cross","Holy Cross","AK","USA",62.18829583,-159.7749503
@@ -485,7 +485,7 @@
 "52A","Madison Municipal","Madison","GA","USA",33.61212528,-83.46044333
 "52E","Timberon ","Timberon","NM","USA",32.63388889,-105.6863889
 "52J","Lee County","Bishopville","SC","USA",34.24459889,-80.23729333
-"53A","Dr. C.P. Savage, Sr.","Montezuma","GA","USA",32.302,-84.00747222
+"53A","Dr. C.P. Savage Sr.","Montezuma","GA","USA",32.302,-84.00747222
 "53K","Osage City Municipal","Osage City","KS","USA",38.63334222,-95.80859806
 "54J","Defuniak Springs","Defuniak Springs","FL","USA",30.7313,-86.15160833
 "55D","Grayling Army Airfield","Grayling","MI","USA",44.68032028,-84.72886278
@@ -709,7 +709,7 @@
 "99Y","Greeley Municipal","Greeley","NE","USA",41.55834528,-98.54618528
 "9A1","Covington Municipal","Covington","GA","USA",33.6324825,-83.84955806
 "9A3","Chuathbaluk","Chuathbaluk","AK","USA",61.58317306,-159.2359667
-"9A4","Lawrence County ","Courtland","AL","USA",34.65938889,-87.34883333
+"9A4","Lawrence County","Courtland","AL","USA",34.65938889,-87.34883333
 "9A5","Barwick-LaFayette ","LaFayette","GA","USA",34.68896917,-85.29023333
 "9A6","Chester Municipal","Chester","SC","USA",34.78933333,-81.19577778
 "9A8","Ugashik","Ugashik","AK","USA",57.5278675,-157.3993056
@@ -1010,7 +1010,7 @@
 "BTM","Bert Mooney","Butte","MT","USA",45.95479528,-112.49746
 "BTN","Britton Municipal","Britton","SD","USA",45.81522222,-97.74313889
 "BTP","Butler Cty","Butler","PA","USA",40.77692611,-79.94972417
-"BTR","Baton Rouge Metropolitan, Ryan ","Baton Rouge","LA","USA",30.53316083,-91.14963444
+"BTR","Baton Rouge Metropolitan Ryan ","Baton Rouge","LA","USA",30.53316083,-91.14963444
 "BTT","Bettles","Bettles","AK","USA",66.91528667,-151.5280556
 "BTV","Burlington International","Burlington","VT","USA",44.47300361,-73.1503125
 "BTY","Beatty","Beatty","NV","USA",36.86105722,-116.7870036
@@ -1773,7 +1773,7 @@
 "HTL","Roscommon County","Houghton Lake","MI","USA",44.35980556,-84.67111111
 "HTO","East Hampton","East Hampton","NY","USA",40.95957778,-72.25185056
 "HTS","Tri-State/Walker-Long ","Huntington","WV","USA",38.36666667,-82.55802778
-"HTW","Lawrence County Airpark,Inc","Chesapeake","OH","USA",38.41924861,-82.4943225
+"HTW","Lawrence County Airpark Inc","Chesapeake","OH","USA",38.41924861,-82.4943225
 "HUF","Terre Haute International-Hulman ","Terre Haute","IN","USA",39.45146361,-87.30756111
 "HUL","Houlton International","Houlton","ME","USA",46.12308333,-67.79205556
 "HUM","Houma-Terrebonne","Houma","LA","USA",29.5665,-90.66041667
@@ -2375,7 +2375,7 @@
 "N14","Flying W","Lumbrerton","NJ","USA",39.93427778,-74.80725
 "N23","Sidney Muni","Sidney","NY","USA",42.30258,-75.41595639
 "N24","Questa Municipal Nr 2","Questa","NM","USA",36.80030556,-105.5975
-"N25","Westport ","Westport, NY","NY","USA",44.15838611,-73.43290444
+"N25","Westport ","Westport NY","NY","USA",44.15838611,-73.43290444
 "N27","Bradford County","Towanda","PA","USA",41.74324028,-76.44457083
 "N29","Magdalena","Magdalena","NM","USA",34.09450778,-107.2978142
 "N30","Cherry Ridge","Honesdale","PA","USA",41.51533861,-75.25148139
@@ -2693,7 +2693,7 @@
 "PTW","Pottstown Limerick","Pottstown","PA","USA",40.23957167,-75.55662528
 "PUB","Pueblo Memorial","Pueblo","CO","USA",38.28908722,-104.4965722
 "PUC","Carbon County","Price","UT","USA",39.61391556,-110.7514183
-"PUW","Pullman/Moscow Regional","Pullman/Moscow,ID","WA","USA",46.74386111,-117.1095833
+"PUW","Pullman/Moscow Regional","Pullman/Moscow ID","WA","USA",46.74386111,-117.1095833
 "PVB","Platteville Municipal","Platteville","WI","USA",42.68935583,-90.44439278
 "PVC","Provincetown Municipal","Provincetown","MA","USA",42.07199833,-70.22137667
 "PVD","Theodore F Green State","Providence","RI","USA",41.72399917,-71.42822111
@@ -2755,7 +2755,7 @@
 "RCR","Fulton County","Rochester","IN","USA",41.06554833,-86.18170444
 "RCX","Rusk County","Ladysmith","WI","USA",45.49825694,-91.00186361
 "RDD","Redding Municipal","Redding","CA","USA",40.50898361,-122.2934019
-"RDG","Reading Muni,Gen Carl A Spaatz","Reading","PA","USA",40.3785,-75.96525
+"RDG","Reading Muni Gen Carl A Spaatz","Reading","PA","USA",40.3785,-75.96525
 "RDK","Red Oak Municipal","Red Oak","IA","USA",41.01052778,-95.25986111
 "RDM","Roberts ","Redmond","OR","USA",44.25406722,-121.1499633
 "RDR","Grand Forks AFB",NA,NA,"USA",47.961167,-97.401167
@@ -2819,7 +2819,7 @@
 "RVJ","Reidsville","Reidsville","GA","USA",32.05897222,-82.15172222
 "RVL","Mifflin Cty","Reedsville","PA","USA",40.67737417,-77.62682833
 "RVN","Hawkins County","Rogersville","TN","USA",36.45757917,-82.88503722
-"RVS","Richard Lloyd Jones, Jr.","Tulsa","OK","USA",36.0396275,-95.984635
+"RVS","Richard Lloyd Jones Jr.","Tulsa","OK","USA",36.0396275,-95.984635
 "RWF","Redwood Falls Muni","Redwood Falls","MN","USA",44.54720389,-95.082255
 "RWI","Rocky Mount Wilson","Rocky Mount","NC","USA",35.85498861,-77.89295611
 "RWL","Rawlins Muni","Rawlins","WY","USA",41.8055975,-107.19994
@@ -3117,9 +3117,9 @@
 "TNP","Twentynine Palms","Twentynine Palms","CA","USA",34.13208528,-115.9458319
 "TNT","Dade Collier T And T","Miami","FL","USA",25.86180556,-80.897
 "TNU","Newton Municipal","Newton","IA","USA",41.67442972,-93.02172917
-"TOA","Zamperini ","Torrance","CA","USA",33.8033775,-118.3396
+"TOA","Zamperini","Torrance","CA","USA",33.8033775,-118.3396
 "TOB","Dodge Center","Dodge Center","MN","USA",44.018,-92.8315
-"TOC","Toccoa, R G Le Tourneau ","Toccoa","GA","USA",34.59376444,-83.2958
+"TOC","Toccoa R G Le Tourneau","Toccoa","GA","USA",34.59376444,-83.2958
 "TOG","Togiak Village","Togiak","AK","USA",59.05284222,-160.3969339
 "TOI","Troy Municipal","Troy","AL","USA",31.86041667,-86.01213889
 "TOL","Toledo Express","Toledo","OH","USA",41.58680556,-83.80783333
