@@ -28,7 +28,9 @@ SELECT
     trip_data.FlightDate,
     trip_data.Year,
     trip_data.Month,
+    trip_data.MonthFull,
     trip_data.Day,
+    trip_data.DayOfWeekNum,
     trip_data.DayOfWeek,
 
     trip_data.DepartureTime,
@@ -40,13 +42,16 @@ SELECT
     trip_data.ScheduledArrivalTime,
     trip_data.Destination,
     dest_airports.airport AS DestinationAirport,
+    dest_airports.lat as lat,
+    dest_airports.long as long,
+
 
 
     trip_data.FlightNum,
     trip_data.UniqueCarrier,
     carriers.Description AS CarrierDescription,
     
-    COALESCE(CONCAT(plane.manufacturer, " | ", plane.model), 'No Information') AS Plane,
+    CONCAT(plane.manufacturer, " | ", plane.model) AS Plane,
     trip_data.TailNum,
 
     trip_data.ActualElapsedTime,

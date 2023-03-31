@@ -1,12 +1,14 @@
 SELECT
 -- Identifiers 
-{{ dbt_utils.surrogate_key(['TailNum', 'FlightNum']) }} AS FlightId,
+{{ dbt_utils.surrogate_key(['TailNum', 'FlightNum', 'Year', 'Month', 'DayofMonth', 'UniqueCarrier', 'Origin', 'Dest', 'AirTime']) }} AS FlightId,
 
 -- Date
 CAST(concat(`Year`, '-', `Month`, '-', `DayofMonth`) AS date) AS FlightDate,
 CAST(Year AS INTEGER) AS Year,
 CAST(Month AS INTEGER) AS Month,
 CAST(DayofMonth AS INTEGER) AS Day,
+DayOfWeek AS DayOfWeekNum,
+{{month_full('Month')}} AS MonthFull,
 {{dow('DayOfWeek')}} AS DayOfWeek,
 
 -- Time
