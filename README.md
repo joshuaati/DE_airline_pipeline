@@ -1,4 +1,4 @@
-`This project is a pipeline created for Data Engineering Zoomcamp 2023`
+`This project is a pipeline created as the final project for Data Engineering Zoomcamp 2023`
 
 # Airline on-time performance
 
@@ -9,7 +9,7 @@ https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/HG7NV7
 
 ---
 
-### Workflow
+## Workflow
 
 This project uses Prefect for workflow orchestration, Docker for containerization, BigQuery as a data warehouse, dbt for data transformation, Looker for data visualization and business intelligence, and Google Cloud Bucket for cloud storage.
 
