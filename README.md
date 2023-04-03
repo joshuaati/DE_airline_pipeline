@@ -26,3 +26,7 @@ This project uses Prefect for workflow orchestration, Docker for containerizatio
 - **Google Cloud Bucket**: This is a cloud storage service provided by Google Cloud Platform. It is used to store and retrieve data.
 
 ![Pipeline](/.images/Workflow.png)
+
+## Dashboard
+
+![dashboard](/.images/Data_Expo_2009__Airline_on_time_Data_Visualization.jpg)
