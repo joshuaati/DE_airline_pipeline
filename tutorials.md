@@ -104,6 +104,10 @@ Setting up GCP would require a GCP account. A GCP account can be created for fre
 <table><tr>
 <td> <img src=".images/project.png" style="width: 450px;"/> </td>
 <td> <img src=".images/service account.png" style="width: 450px;"/> </td>
+<tr>
+<td>creating new project</td>
+<td>creating service account</td>
+</tr>
 </tr></table>
 
 3. Create a service account.
@@ -135,6 +139,10 @@ Setting up GCP would require a GCP account. A GCP account can be created for fre
 <table><tr>
 <td> <img src=".images/buckets.png" style="width: 450px;"/> </td>
 <td> <img src=".images/dataset.png" style="width: 450px;"/> </td>
+<tr>
+<td>bucket creation</td>
+<td>dataset creation</td>
+</tr>
 </tr></table>
 
 ---
@@ -183,3 +191,28 @@ You can add as many deployments as is neccessary to create your complete workflo
 ---
 
 ### Data transformations with dbt
+
+dbt is already installed with the Dockerfile that created the Dev Container
+To run dbt, follow these steps
+
+1. Initialize DBT: Create a new dbt project by running the command `dbt init project_name` in your terminal.
+
+2. Configure your dbt project: Open your dbt project and navigate to the `profiles.yml` file. Here, you'll need to specify the credentials to connect to your BigQuery instance. You can do this by setting the target to BigQuery and providing your project ID and credentials.
+
+3. Test your dbt cnnection: This can easily be done using the `dbt debug` commnand. If all connections are successful, you'd get an All checks passed! response. Note that you might have to change directory into the dbt project
+
+<table><tr>
+<td> <img src=".images/dbt profiles.png" style="width: 450px;"/> </td>
+<td> <img src=".images/dbt debug.png" style="width: 450px;"/> </td>
+</tr>
+<tr>
+<td>dbt profile sample</td>
+<td>dbt debug success</td>
+</tr>
+</table>
+
+Create a new dbt model: In your dbt project, create a new directory for your models. Inside the directory, create a new SQL file and write your SQL transformation code. You can use Jinja templating to make your queries dynamic and reusable.
+
+Compile and test your dbt models: Run the command dbt compile to compile your dbt models. This command checks your syntax and validates your SQL code against your schema. Once your models are compiled successfully, you can run the command dbt test to validate your data.
+
+Run your dbt models: Finally, you can run your dbt models by running the command dbt run. This will execute your SQL code and create new tables or update existing ones based on your transformations.
