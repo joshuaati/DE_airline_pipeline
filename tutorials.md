@@ -8,6 +8,7 @@
 - [Setting up GCP Services](#setting-up-gcp-services)
 - [Orchestration with Prefect](#orchestration-with-prefect)
 - [Data transformations with dbt](#data-transformations-with-dbt)
+- [Creating Visualizations](#creating-visualizations)
 
 For this project, to ensure minimal compactibility issues, I used a Dev Container in VSCode to create a developement environment with the help of Docker.
 
@@ -211,8 +212,22 @@ To run dbt, follow these steps
 </tr>
 </table>
 
-Create a new dbt model: In your dbt project, create a new directory for your models. Inside the directory, create a new SQL file and write your SQL transformation code. You can use Jinja templating to make your queries dynamic and reusable.
+4. Create a new dbt model: In your dbt project, `macro`, `seed` and `models` directory should already available, create a new SQL file and write your SQL transformation code. You can use Jinja templating to make your queries dynamic and reusable.
 
-Compile and test your dbt models: Run the command dbt compile to compile your dbt models. This command checks your syntax and validates your SQL code against your schema. Once your models are compiled successfully, you can run the command dbt test to validate your data.
+   For reusable code, create macros and to upload flat files as part of the model use the seeds direcctory
 
-Run your dbt models: Finally, you can run your dbt models by running the command dbt run. This will execute your SQL code and create new tables or update existing ones based on your transformations.
+5. Compile and test your dbt models: Run the command `dbt compile` to compile your dbt models. This command checks your syntax and validates your SQL code against your schema. Once your models are compiled successfully, you can run the command `dbt test` to validate your data.
+
+6. Run your dbt models: Finally, you can run your dbt models by running the command `dbt run`. This will execute your SQL code and create new tables or update existing ones based on your transformations.
+
+---
+
+### Creating Visualizations
+
+With your google account, log in at [Google looker studio](https://lookerstudio.google.com/navigation/reporting)
+
+Connect your dataset using the Big Query Connector
+
+- Select your project name then select the dataset. This would bring you to the dashboard page
+
+Create your visualizations and share

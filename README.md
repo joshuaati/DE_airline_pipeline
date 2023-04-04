@@ -4,8 +4,9 @@
 
 Have you ever been stuck in an airport because your flight was delayed or cancelled and wondered if you could have predicted it if you'd had more data?
 
-**The data**: The data consists of flight arrival and departure details for all commercial flights within the USA, from October 1987 to April 2008. This is a large dataset: there are nearly 120 million records in total, and takes up 1.6 gigabytes of space compressed and 12 gigabytes when uncompressed
-https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/HG7NV7
+**The data**: The data consists of flight arrival and departure details for all commercial flights within the USA, from October 1987 to April 2008. This is a large dataset: there are nearly 120 million records in total, and takes up 1.6 gigabytes of space compressed and 12 gigabytes when uncompressed.
+
+The data can be accessed on the [harvard dataverse website](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/HG7NV7)
 
 ---
 
@@ -31,6 +32,6 @@ This project uses Prefect for workflow orchestration, Docker for containerizatio
 
 ## Dashboard
 
-For a clearer version of the dashboard, you can check out google looker studio https://lookerstudio.google.com/reporting/5370a0a2-b22f-41cf-84ed-2a52da71581a
+For a clearer version of the dashboard, you can check out google looker studio [here](https://lookerstudio.google.com/reporting/5370a0a2-b22f-41cf-84ed-2a52da71581a)
 
 ![dashboard](/.images/Data_Expo_2009__Airline_on_time_Data_Visualization.jpg)
