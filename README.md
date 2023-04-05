@@ -38,4 +38,4 @@ This project uses Prefect for workflow orchestration, Docker for containerizatio
 
 For a clearer version of the dashboard, you can check out google looker studio [here](https://lookerstudio.google.com/reporting/5370a0a2-b22f-41cf-84ed-2a52da71581a)
 
-![dashboard](/.images/Data_Expo_2009__Airline_on_time_Data_Visualization.jpg)
+![dashboard](/.images/Airline_on_time_Data_Visualization.jpg)
