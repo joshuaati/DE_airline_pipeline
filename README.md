@@ -10,6 +10,10 @@ The data can be accessed on the [harvard dataverse website](https://dataverse.ha
 
 ---
 
+## Tutorials
+
+The tutorials on how to setup and run this project can be found [here](tutorials.md)
+
 ## Workflow
 
 This project uses Prefect for workflow orchestration, Docker for containerization, BigQuery as a data warehouse, dbt for data transformation, Looker for data visualization and business intelligence, and Google Cloud Bucket for cloud storage.
