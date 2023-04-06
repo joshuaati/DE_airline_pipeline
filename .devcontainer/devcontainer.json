@@ -16,7 +16,8 @@
 				"esbenp.prettier-vscode",
 				"ms-toolsai.jupyter",
 				"ms-python.python",
-				"donjayamanne.python-extension-pack"
+				"donjayamanne.python-extension-pack",
+				"gitpod.gitpod-remote-ssh"
 			]
 		}
 	},
